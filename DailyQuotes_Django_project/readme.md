@@ -1,8 +1,14 @@
 # Quote of the Day
 
 Welcome to Quote of the Day! This is a simple Django application that displays a new inspirational quote each day. Quotes are fetched from an external API and cached to ensure a fresh quote every day.
+![Screenshot (221)](https://github.com/workwithshreesh/Django_Mini_Projects/assets/117170243/82989124-d69e-4344-b9ba-b44f91aa9e98)
 
 ## Installation
+
+Add Api of quotes from api Ninja:
+   1. Go to Views.py
+   2. Copy Api from api ninja and paste in between given code bellow
+   3. response = requests.get(api_url, headers={'X-Api-Key': 'Your Api of api-ninja'})
 
 1. Clone the repository:
 
