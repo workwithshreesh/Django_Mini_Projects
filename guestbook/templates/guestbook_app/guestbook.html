@@ -1,0 +1,47 @@
+<!-- templates/guestbook_app/guestbook.html -->
+{% extends 'guestbook_app/base.html' %}
+{% block title %}Guestbook{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2 class="mb-4">Guestbook</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary btn-block mb-4">Post Message</button>
+        </form>
+        <div class="list-group">
+            {% for message in page_obj %}
+                <div class="list-group-item">
+                    <h5 class="mb-1">{{ message.user.username }}</h5>
+                    <p class="mb-1">{{ message.message }}</p>
+                    <small class="text-muted">{{ message.create_at }}</small>
+                </div>
+            {% endfor %}
+        </div>
+        <nav aria-label="Page navigation" class="mt-4">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">&laquo; First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                    </li>
+                {% endif %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a>
+                </li>
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}
